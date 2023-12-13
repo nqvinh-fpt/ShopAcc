@@ -32,7 +32,7 @@ public class AdminServiceImpl implements AdminService {
         for (Account account : accountList) {
             String roleName = null;
             for (Role role : roleList) {
-                if (account.getRoleID() == role.getRoleID()) {
+                if (Integer.parseInt(String.valueOf(account.getRoleID())) == role.getRoleID()) {
                     roleName = role.getRoleName();
                 }
             }

@@ -17,7 +17,7 @@ import java.util.List;
 
 @RestController
 @RequiredArgsConstructor
-@RequestMapping("/admin-page")
+@RequestMapping("api/v1/admin")
 public class AdminController {
     public final AdminServiceImpl adminService;
     @GetMapping("/list-user")

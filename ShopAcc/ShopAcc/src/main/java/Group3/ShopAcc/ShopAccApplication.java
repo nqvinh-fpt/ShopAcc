@@ -10,7 +10,7 @@ import org.springframework.context.ApplicationContext;
 
 import java.util.List;
 
-@SpringBootApplication(exclude = {SecurityAutoConfiguration.class })
+@SpringBootApplication
 public class ShopAccApplication {
 
 	public static void main(String[] args) {
