@@ -1,6 +1,7 @@
 package Group3.ShopAcc.Config;
 
 import Group3.ShopAcc.Entity.Role;
+import Group3.ShopAcc.Entity.RoleName;
 import Group3.ShopAcc.Service.AccountService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Bean;
@@ -28,10 +29,10 @@ public class SecurityConfiguration {
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
         http.csrf(AbstractHttpConfigurer::disable)
-                .authorizeHttpRequests(request -> request.requestMatchers("/api/v1/auth/**")
-                        .permitAll()
-                        .requestMatchers("/api/v1/admin").hasAnyAuthority("ADMIN")
-                        .requestMatchers("/api/v1/user").hasAnyAuthority("USER")
+                .authorizeHttpRequests(request -> request
+                        .requestMatchers("/api/v1/**").permitAll()
+                        .requestMatchers("/api/v1/admin").hasAnyAuthority(RoleName.ADMIN.name())
+                        .requestMatchers("/api/v1/user").hasAnyAuthority(RoleName.USER.name())
                         .anyRequest().authenticated())
 
                 .sessionManagement(manager -> manager.sessionCreationPolicy(SessionCreationPolicy.STATELESS))

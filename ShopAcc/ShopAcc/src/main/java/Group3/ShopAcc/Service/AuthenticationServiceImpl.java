@@ -5,9 +5,7 @@ import Group3.ShopAcc.Dto.RefreshTokenRequest;
 import Group3.ShopAcc.Dto.SignUpRequest;
 import Group3.ShopAcc.Dto.SigninRequest;
 import Group3.ShopAcc.Entity.Account;
-import Group3.ShopAcc.Entity.Role;
 import Group3.ShopAcc.Repository.AccountRepository;
-import Group3.ShopAcc.Repository.RoleRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
@@ -15,24 +13,24 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.util.HashMap;
-import java.util.List;
-import java.util.Optional;
 
 @Service
 @RequiredArgsConstructor
 public class AuthenticationServiceImpl implements AuthenticationService{
     private final AccountRepository accountRepository;
-    private final RoleRepository roleRepository;
-    private final PasswordEncoder passwordEncoder;
     private final AuthenticationManager authenticationManager;
     private final JWTService jwtService;
+    private final PasswordEncoder passwordEncoder;
     public Account signup(SignUpRequest signUpRequest){
 
         Account account = new Account();
         account.setUserName(signUpRequest.getUsername());
         account.setPassword(passwordEncoder.encode(signUpRequest.getPassword()));
         account.setRoleID(signUpRequest.getRoleName());
-
+        account.setEmail(signUpRequest.getEmail());
+        account.setCurrency(signUpRequest.getCurrency());
+        account.setPhone(signUpRequest.getPhone());
+        account.setStatus(signUpRequest.getStatus());
         return accountRepository.save(account);
     }
 

@@ -8,4 +8,5 @@ import java.util.List;
 public interface ProductService  {
 
      List<ProductDto> listAllProduct() ;
+     List<ProductDto> listAllProductByID(int productID);
 }

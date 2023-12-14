@@ -6,6 +6,7 @@ import Group3.ShopAcc.Entity.*;
 import Group3.ShopAcc.Repository.AccountGameRepository;
 import Group3.ShopAcc.Repository.CategoryRepository;
 import Group3.ShopAcc.Repository.ProductRepository;
+import jakarta.persistence.EntityNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Service;
@@ -66,6 +67,39 @@ public class ProductServiceImpl implements ProductService {
         }
         return productDtoList;
     }
+
+    @Override
+    public List<ProductDto> listAllProductByID(int productID) {
+        Product product = productRepository.findById(productID)
+                .orElseThrow(() -> new EntityNotFoundException("Product not found with ID: " + productID));
+
+        Category category = categoryRepository.findById(product.getCategoryID())
+                .orElseThrow(() -> new EntityNotFoundException("Category not found with ID: " + product.getCategoryID()));
+
+        AccountGame accountGame = accountGameRepository.findById(product.getAccountGameID())
+                .orElseThrow(() -> new EntityNotFoundException("AccountGame not found with ID: " + product.getAccountGameID()));
+        List<ProductDto> productDetail=new ArrayList<>();
+        ProductDto productDto = new ProductDto(
+                product.getProductID(),
+                product.getImg(),
+                product.getRank(),
+                product.getSkin(),
+                product.getLegend(),
+                product.getSpiritAnimal(),
+                product.getArena(),
+                product.getPrice(),
+                product.getStatus(),
+                product.getCategoryID(),
+                product.getAccountGameID(),
+                product.getAccountID(),
+                category.getCategoryName(),
+                accountGame.getUserName(),
+                accountGame.getPassword()
+        );
+        productDetail.add(productDto);
+        return productDetail;
+    }
+
 
 
 

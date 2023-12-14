@@ -27,7 +27,6 @@ public class Account implements UserDetails {
     private int AccountID;
     @Column(name = "username")
     private String userName;
-    @ColumnTransformer(write = "SHA2(?, 256)")
     private String password;
     @Column(name = "phone")
     private String phone;

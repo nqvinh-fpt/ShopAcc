@@ -20,7 +20,7 @@ import java.util.List;
 @RequestMapping("api/v1/admin")
 public class AdminController {
     public final AdminServiceImpl adminService;
-    @GetMapping("/list-user")
+    @GetMapping("list-account")
     public ResponseEntity<List<AccountDto>> getAllUse(){
         assert adminService != null;
         final List<AccountDto> listAccount = adminService.listAllUse();

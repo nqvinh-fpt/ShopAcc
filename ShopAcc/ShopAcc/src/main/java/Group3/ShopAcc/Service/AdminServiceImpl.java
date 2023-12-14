@@ -4,6 +4,7 @@ import Group3.ShopAcc.Dto.AccountDto;
 import Group3.ShopAcc.Entity.Account;
 import Group3.ShopAcc.Entity.AccountGame;
 import Group3.ShopAcc.Entity.Role;
+import Group3.ShopAcc.Entity.RoleName;
 import Group3.ShopAcc.Repository.AccountGameRepository;
 import Group3.ShopAcc.Repository.AccountRepository;
 import Group3.ShopAcc.Repository.AdminRepository;
@@ -32,7 +33,8 @@ public class AdminServiceImpl implements AdminService {
         for (Account account : accountList) {
             String roleName = null;
             for (Role role : roleList) {
-                if (Integer.parseInt(String.valueOf(account.getRoleID())) == role.getRoleID()) {
+                int roleID = account.getRoleID() == RoleName.USER ? 0 : 1;
+                if (roleID == role.getRoleID()) {
                     roleName = role.getRoleName();
                 }
             }

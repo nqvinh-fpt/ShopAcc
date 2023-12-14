@@ -10,6 +10,4 @@ import java.util.List;
 import java.util.Optional;
 @Repository
 public interface RoleRepository extends JpaRepository<Role,Integer> {
-    @Query("SELECT r.roleID FROM Role r")
-    Integer findAllRoleIDs();
 }
