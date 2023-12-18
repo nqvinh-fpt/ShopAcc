@@ -1,25 +1,34 @@
 package Group3.ShopAcc.Controller;
 
 import Group3.ShopAcc.Dto.*;
-import Group3.ShopAcc.Entity.Account;
-import Group3.ShopAcc.Entity.AccountGame;
-import Group3.ShopAcc.Entity.Product;
-import Group3.ShopAcc.Entity.Role;
+import Group3.ShopAcc.Entity.*;
+import Group3.ShopAcc.Repository.*;
 import Group3.ShopAcc.Service.AdminServiceImpl;
 import Group3.ShopAcc.Service.ProductServiceImpl;
 import lombok.RequiredArgsConstructor;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Optional;
 
 @RestController
 @RequiredArgsConstructor
-@RequestMapping("/admin-page")
+@RequestMapping("/api/v1/admin")
 public class AdminController {
+    @Autowired
+    ProductRepository productRepository ;
+    @Autowired
+    AdminRepository adminRepository ;
+    @Autowired
+    RoleRepository roleRepository ;
+
+    @Autowired
+    AccountGameRepository accountGameRepository ;
+    @Autowired
+    CategoryRepository categoryRepository ;
     public final AdminServiceImpl adminService;
     public final ProductServiceImpl productService;
     @GetMapping("/list-user")
@@ -53,4 +62,42 @@ public class AdminController {
         final List<ProductDto> listProduct = productService.listAllProduct();
         return ResponseEntity.status(HttpStatus.OK).body(listProduct);
     }
+
+    @PostMapping("/add-product")
+    public ResponseEntity<?> addProduct(@RequestBody Product productRequest){
+        productRepository.save(productRequest);
+        return ResponseEntity.status(HttpStatus.OK).body(productRequest);
+    }
+    @PostMapping("/add-category")
+    public ResponseEntity<?> addCategory(@RequestBody Category categoryRequest){
+        categoryRepository.save(categoryRequest);
+        return ResponseEntity.status(HttpStatus.OK).body(categoryRequest);
+    }
+
+    @PostMapping("/add-account-game")
+    public ResponseEntity<?> addAccountGame(@RequestBody AccountGame categoryRequest){
+        accountGameRepository.save(categoryRequest);
+        return ResponseEntity.status(HttpStatus.OK).body(categoryRequest);
+    }
+
+    @PostMapping("/update-product")
+    public ResponseEntity<?> updateAccountGame(@RequestBody Product productRequest){
+        productRepository.save(productRequest);
+        return ResponseEntity.status(HttpStatus.OK).body(productRequest);
+    }
+    @PostMapping("/update-category")
+    public ResponseEntity<?> updateCategory(@RequestBody Category categoryRequest){
+        categoryRepository.save(categoryRequest);
+        return ResponseEntity.status(HttpStatus.OK).body(categoryRequest);
+    }
+    @PostMapping("/update-account-game")
+    public ResponseEntity<?> updateAccountGame(@RequestBody AccountGame accountGameRequest){
+        accountGameRepository.save(accountGameRequest);
+        return ResponseEntity.status(HttpStatus.OK).body(accountGameRequest);
+    }
+
+    
+
+
+
 }
