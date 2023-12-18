@@ -81,8 +81,23 @@ public class AdminController {
     }
 
     @PostMapping("/update-product")
-    public ResponseEntity<?> addAccountGame(@RequestBody Product productRequest){
+    public ResponseEntity<?> updateAccountGame(@RequestBody Product productRequest){
         productRepository.save(productRequest);
         return ResponseEntity.status(HttpStatus.OK).body(productRequest);
     }
+    @PostMapping("/update-category")
+    public ResponseEntity<?> updateCategory(@RequestBody Category categoryRequest){
+        categoryRepository.save(categoryRequest);
+        return ResponseEntity.status(HttpStatus.OK).body(categoryRequest);
+    }
+    @PostMapping("/update-account-game")
+    public ResponseEntity<?> updateAccountGame(@RequestBody AccountGame accountGameRequest){
+        accountGameRepository.save(accountGameRequest);
+        return ResponseEntity.status(HttpStatus.OK).body(accountGameRequest);
+    }
+
+    
+
+
+
 }
