@@ -3,10 +3,7 @@ package Group3.ShopAcc.Service;
 import Group3.ShopAcc.Dto.AccountDto;
 import Group3.ShopAcc.Dto.AccountGameDto;
 import Group3.ShopAcc.Dto.CategoryDto;
-import Group3.ShopAcc.Entity.Account;
-import Group3.ShopAcc.Entity.AccountGame;
-import Group3.ShopAcc.Entity.Category;
-import Group3.ShopAcc.Entity.Role;
+import Group3.ShopAcc.Entity.*;
 import Group3.ShopAcc.Repository.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
@@ -35,7 +32,8 @@ public class AdminServiceImpl implements AdminService {
         for (Account account : accountList) {
             String roleName = null;
             for (Role role : roleList) {
-                if (account.getRole().getRoleID() == role.getRoleID()) {
+                int roleID = account.getRoleID() == RoleName.USER ? 0 : 1;
+                if (roleID == role.getRoleID()) {
                     roleName = role.getRoleName();
                 }
             }

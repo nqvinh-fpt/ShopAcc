@@ -9,7 +9,7 @@ import lombok.*;
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
-@Table(name = "products")
+@Table(name = "Products")
 public class Product {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -30,12 +30,10 @@ public class Product {
     private float price;
     @Column(name = "status")
     private String status;
-    @ManyToOne
-    @JoinColumn(name = "categoryID", referencedColumnName = "categoryID")
-    private Category category;
-    @ManyToOne
-    @JoinColumn(name = "accountGameID", referencedColumnName = "accountGameID")
-    private AccountGame accountGame;
+    @Column(name = "categoryID")
+    private int categoryID;
+    @Column(name = "accountGameID")
+    private int accountGameID;
     @Column(name = "accountID")
     private int accountID;
 }
