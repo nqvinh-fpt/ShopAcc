@@ -96,7 +96,11 @@ public class AdminController {
         return ResponseEntity.status(HttpStatus.OK).body(accountGameRequest);
     }
 
-    
+    @GetMapping("/list-user/{userId}")
+    public ResponseEntity<AccountDto> getAccountDetails(@PathVariable int userId){
+        final AccountDto listProduct = adminService.accountDetail(userId);
+        return ResponseEntity.status(HttpStatus.OK).body(listProduct);
+    }
 
 
 

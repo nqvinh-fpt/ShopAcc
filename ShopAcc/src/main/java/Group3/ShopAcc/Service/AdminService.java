@@ -13,4 +13,6 @@ public interface AdminService {
     List<AccountGameDto> listAllAccountGame();
 
     List<CategoryDto> listAllCategory();
+
+    AccountDto accountDetail(int userId);
 }
