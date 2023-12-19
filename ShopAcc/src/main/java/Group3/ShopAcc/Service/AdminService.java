@@ -10,9 +10,6 @@ import java.util.List;
 
 public interface AdminService {
     List<AccountDto> listAllUse();
-
-    AccountDto listAccountDetail(int accountId);
-
     List<AccountGameDto> listAllAccountGame();
 
     List<CategoryDto> listAllCategory();
