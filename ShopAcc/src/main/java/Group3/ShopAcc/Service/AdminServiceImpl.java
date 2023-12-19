@@ -52,6 +52,35 @@ public class AdminServiceImpl implements AdminService {
         return accountDtoList;
     }
 
+    @Override
+    public AccountDto listAccountDetail(int accountId) {
+        List<Account> accountList = adminRepository.findAll();
+        List<Role> roleList = roleRepository.findAll();
+        AccountDto accountDto = null;
+        for (Account account : accountList) {
+            String roleName = null;
+            for (Role role : roleList) {
+                int roleID = account.getRoleID() == RoleName.USER ? 0 : 1;
+                if (roleID == role.getRoleID()) {
+                    roleName = role.getRoleName();
+                }
+            }
+            if (accountId == account.getAccountID()) {
+                accountDto = new AccountDto(account.getAccountID(),
+                        account.getUsername(),
+                        account.getPassword(),
+                        account.getPhone(),
+                        account.getEmail(),
+                        account.getCurrency(),
+                        account.getStatus(),
+                        roleName);
+            }
+
+
+        }
+        return accountDto;
+    }
+
     public List<Role>listAllRole(){
         return roleRepository.findAll();
     }
